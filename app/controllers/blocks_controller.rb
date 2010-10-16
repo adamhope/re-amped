@@ -73,6 +73,8 @@ class BlocksController < ApplicationController
       @output += "#\n"
     end
     @output += top_bottom  + "\n"
+
+    @output = '"' + @output + '"'
     
     Rails::logger.info "##################"
     Rails::logger.info @output
