@@ -14,10 +14,10 @@
   <tr>
     <td><%=h block.x %></td>
     <td><%=h block.y %></td>
-    <td><%=h block.north %></td>
-    <td><%=h block.east %></td>
-    <td><%=h block.south %></td>
-    <td><%=h block.west %></td>
+    <td><a href="/items/<%= block.north %>"><%= block.north %></a></td>
+    <td><a href="/items/<%= block.east %>"><%= block.east %></a></td>
+    <td><a href="/items/<%= block.south %>"><%= block.south %></a></td>
+    <td><a href="/items/<%= block.west %>"><%= block.west %></a></td>
     <td><%= link_to 'Show', block %></td>
     <td><%= link_to 'Edit', edit_block_path(block) %></td>
     <td><%= link_to 'Destroy', block, :confirm => 'Are you sure?', :method => :delete %></td>
