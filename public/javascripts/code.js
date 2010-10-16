@@ -111,6 +111,7 @@ var world = (function () {
     document.addEventListener('keydown', inputHandler, false);
 
     function getRoomData(callback) {
+        console.debug('getting room data');
         $.get(base_url + 'blocks/coordinate/' + location.x + '/' + location.y + '.json', callback);
     }
 
@@ -147,23 +148,32 @@ var world = (function () {
     }
 
     function drawRoom(room) {
+        console.debug('drawing room', room);
         drawWall(room, 'north');
         drawWall(room, 'south');
         drawWall(room, 'east');
         drawWall(room, 'west');
     }
 
-    $('.item').mouseover(function () {
-        // show remove link
+    function refreshRoom() {
+        console.debug('refreshRoom');
+        getRoomData(drawRoom);
+    }
+
+    $('.deleteWall').click(function () {
+        $.get(base_url + 'blocks/coordinate/' + location.x + '/' + location.y + '/' + direction + '/0.json', refreshRoom);
     });
 
     $('.face').click(function () {
         var content = $('.content', this).html();
 
+
         console.debug(location.x, location.y, direction);
 
         if ($(this).hasClass('three')) {
-            if (!content) {
+            
+            
+            if (!$(this).hasClass('wall')) {
                 if (direction === 'north') {
                     location.y++;
                 } else if (direction === 'east') {
@@ -176,6 +186,8 @@ var world = (function () {
             } else {
                 console.debug('wall has content, cannot go forwards');
             }
+            
+            
         } else if ($(this).hasClass('two')) {
             console.debug('turn right 90 deg');
             if (direction === 'north') {
@@ -253,19 +265,6 @@ var world = (function () {
         getRoomData(drawRoom);
 
     });
-
-    function deleteWall() {
-        console.debug('delete');
-    }
-
-    function addItem() {
-        console.debug('addItem');
-    }
-
-    function moveTo(pos) {
-        // getRoomData
-        // callback to drawRoom
-    }
 
     // INIT
     getRoomData(drawRoom);
