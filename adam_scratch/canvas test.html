@@ -1,25 +1,207 @@
 <!DOCTYPE html>
-<html>
+<html dir="ltr" lang="en-US">
 <head>
-    <meta charset="utf-8">
-	<title>untitled</title>
-	<meta name="generator" content="TextMate http://macromates.com/">
-	<meta name="author" content="Adam Hope">
-	<!-- Date: 2010-10-16 -->
+	<meta charset="UTF-8" />
+
+	<title>Museum Craft</title>
 	
-    <style>
-        
-    </style>
-	
+	<style type="text/css" media="screen">
+
+    #space {
+      margin-top: 100px;
+      height: 600px;
+      -webkit-perspective: 800;
+      -webkit-perspective-origin: 50% 200px;
+    }
+
+    .shape {
+      position: relative;
+      margin: 0 auto;
+      height: 400px;
+      width: 400px;
+      -webkit-transition: -webkit-transform 2s linear;
+      -webkit-transform-style: preserve-3d;
+    }
+
+    .shape .face {
+/*      -webkit-transition: opacity, -webkit-transform 2s linear;*/
+    }
+
+    .shape .face .content {
+/*      -webkit-transition: opacity 0.8s linear;*/
+    }
+
+    .cube .face {
+      position: absolute;
+      height: 360px;
+      width: 360px;
+      padding: 20px;
+      background-color: rgba(50, 50, 50, 0.7);
+      font-size: 27px;
+      line-height: 1em;
+      color: #fff;
+      border: 1px solid #555;
+      -webkit-border-radius: 3px;
+    }
+
+    /* Cube */
+    
+    .cube .one  {
+      -webkit-transform: translateZ(200px);
+    }
+
+    .cube .two {
+      -webkit-transform: rotateY(270deg) translateZ(-200px);
+    }
+
+    .cube .three {
+      -webkit-transform: rotateY(360deg) translateZ(-200px);
+      
+    }
+
+    .cube .four {
+      -webkit-transform: rotateX(90deg) translateZ(200px);
+      
+    }
+
+    .cube .five {
+      -webkit-transform: rotateY(90deg) translateZ(-200px);
+    }
+
+    .cube .six {
+      -webkit-transform: rotateX(90deg) rotate(360deg) translateZ(-200px) ;
+    }
+
+  </style>
+
 </head>
+
 <body>
+  
+  <div id="wrapper">
 
-    <canvas id="screen"></canvas>
+  	<div id="space">
 
-    <script>
-    var can = document.getElementById('canvas');
-    var ctx = can.getContext('2d');
-    </script>
+  		<div class="shape cube">
+	        <div class="face one" style="display:none;">
+            <div class="content">One</div>
+	        </div>
+	        <div class="face two">
+            <div class="content">Two</div>
+	        </div>
+	        <div class="face three">
+            <div class="content">Three</div>
+	        </div>
+	        <div class="face four">
+            <div class="content">Four</div>
+	        </div>
+	        <div class="face five">
+            <div class="content">Five 5555555555555555555</div>
+	        </div>
+	        <div class="face six">
+            <div class="content">Six</div>
+	        </div>
+	    </div>
+  	    
+  	</div>
+
+  </div>
+
+  <!-- // <script src="../common/jquery-1.4.2.min.js" charset="utf-8"></script> -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" charset="utf-8"></script>
+  <script type="text/javascript">
+
+    (function () {
+
+      var zAxis    = 0,
+          yAngle   = 0,
+          xAngle   = 0,
+          zAxisInc = 400,
+          pos      = 0,
+          maxPos   = 5,
+          yAngInt  = 90,
+
+      reset = function () {
+        zAxis    = 0;
+        yAngle   = 0;
+        xAngle   = 0;
+        zAxisInc = 400;
+        pos      = 0;
+        maxPos   = 5;
+        yAngInt  = 90;
+      },
+      
+      toggleShape = function () {
+         reset();
+         if ($('.shape').hasClass('rack')) {
+           $('.shape').removeClass('rack').addClass('ring');
+           yAngInt = 60;
+         } else if ($('.shape').hasClass('ring')) {
+           $('.shape').removeClass('ring').addClass('cube');
+         } else {
+           $('.shape').removeClass('cube').addClass('rack');
+         }
+       },
+
+      inputHandler = function (e) {
+
+        var transformation = "";
+
+        switch (e.keyCode) {
+
+          case 32: // space
+            toggleShape();
+            break;
+
+          case 37: // left
+            yAngle -= yAngInt;
+            break;
+
+          case 38: // up
+            xAngle += 90;
+            break;
+
+          case 39: // right
+            yAngle += yAngInt;
+            break;
+
+          case 40: // down
+            xAngle -= 90;
+            break;
+
+          case 189: // minus
+            if (pos > 0) {
+              zAxis -= zAxisInc;
+              pos -= 1;
+              $('.rack .face > div')[pos].style.opacity = "1";
+            }
+            break;
+
+          case 187: // plus
+            if (pos < maxPos) {          
+              zAxis += zAxisInc;
+              pos += 1;
+              $('.rack .face > div')[pos-1].style.opacity = "0";
+            }
+            break;
+
+          }
+
+        transformation = "translateZ(" + zAxis + "px)" +
+          " rotateX(" + xAngle + "deg)" +
+          " rotateY(" + yAngle + "deg)";
+
+        $('.shape')[0].style.webkitTransform = transformation;
+
+        e.preventDefault();
+
+      };
+
+      document.addEventListener('keydown', inputHandler, false);
+      
+    })();
+
+  </script>
 
 </body>
 </html>
