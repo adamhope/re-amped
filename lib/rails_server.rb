@@ -6,7 +6,7 @@ class RailsServer
   SERVER_SCRIPT = 'script/server'
 
   def self.start
-    ENV['RAILS_ENV'] ||= 'test'
+    ENV['RAILS_ENV'] ||= 'development'
     unless PidFile.new(PID_FILE).running?
       system "#{SERVER_SCRIPT} -d -e #{ENV['RAILS_ENV']}"
     else
