@@ -1,0 +1,6 @@
+DELETE FROM `blocks` WHERE id IN (1,2);
+INSERT INTO `blocks` (id, user_id, x, y, north, east, south, west, created_at, updated_at) VALUES (1,0,0,0,0,1,267220,346260,NULL,NULL), (2,0,0,1,402292,1,0,346260,NULL,NULL);
+
+DELETE FROM `items` WHERE id IN (2,3,4);
+INSERT INTO `items` (id,powerhouse_id,image_url,created_at,updated_at) VALUES (2,267220,'http://images.powerhousemuseum.com/images/zoomify/thumbs/228286.jpg',NULL,NULL),(3,346260,'http://images.powerhousemuseum.com/images/zoomify/thumbs/228281.jpg',NULL,NULL),(4,402292,'http://images.powerhousemuseum.com/images/zoomify/thumbs/297990.jpg',NULL,NULL);
+
