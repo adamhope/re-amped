@@ -1,18 +1,18 @@
 
 Web service:
 GET /block/$x/$y
-Return JSON: { north: $objectid_a, east: $objectid_b, south: $objectid_c, west: $objectid_d }
+Return JSON: { north: $itemid_a, east: $itemid_b, south: $itemid_c, west: $itemid_d }
 
 POST /block/$x/$y/$direction
-objectid=$objectid
+itemid=$itemid
 
-GET /object
-Description: List of valid objectIDs
-Return JSON: [ $objectid_a, $objectid_b, etc ]
+GET /item
+Description: List of valid itemIDs
+Return JSON: [ $itemid_a, $itemid_b, etc ]
 
-GET /object/$objectid
-Description: Returns a JSON hash of object details.
-Return JSON: { id: $objectid, name: 'Picasso', description: 'naked people', image: '/1234.jpg' }
+GET /item/$itemid
+Description: Returns a JSON hash of item details.
+Return JSON: { id: $itemid, name: 'Picasso', description: 'naked people', image: '/1234.jpg' }
 
 Variable: $direction
 Description: Direction (we can potentially change this to an integer if that makes it easier)
@@ -26,6 +26,6 @@ Variable: $y
 Description: Coordinate in the vertical direction. Positive is northerly, negative is southerly.
 Datatype: integer [-2^31, 2^31-1]
 
-Variable: $objectid
-Description: Represents an object.
+Variable: $itemid
+Description: Represents an item.
 Datatype: non-negative integer [0, 2^31-1]
