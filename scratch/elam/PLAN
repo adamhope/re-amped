@@ -10,6 +10,10 @@ GET /object
 Description: List of valid objectIDs
 Return JSON: [ $objectid_a, $objectid_b, etc ]
 
+GET /object/$objectid
+Description: Returns a JSON hash of object details.
+Return JSON: { id: $objectid, name: 'Picasso', description: 'naked people', image: '/1234.jpg' }
+
 Variable: $direction
 Description: Direction (we can potentially change this to an integer if that makes it easier)
 Datatype: enum ('north', 'east', 'south', 'west')
