@@ -173,8 +173,8 @@ class BlocksController < ApplicationController
       if @block.update_attributes(params[:direction].to_sym => params[:item])
         flash[:notice] = 'Block was successfully updated.'
         format.html { redirect_to(@block) }
-        format.xml  { head :ok }
-        format.json  { head :ok }
+        format.xml { redirect_to(@block) }
+        format.json { redirect_to(@block) }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @block.errors, :status => :unprocessable_entity }
