@@ -58,26 +58,31 @@ var world = (function () {
         case 32:
             // space
             toggleShape();
+            e.preventDefault();
             break;
 
         case 37:
             // left
             yAngle -= yAngInt;
+            e.preventDefault();
             break;
 
         case 38:
             // up
             xAngle += 90;
+            e.preventDefault();
             break;
 
         case 39:
             // right
             yAngle += yAngInt;
+            e.preventDefault();
             break;
 
         case 40:
             // down
             xAngle -= 90;
+            e.preventDefault();
             break;
 
         case 189:
@@ -87,6 +92,7 @@ var world = (function () {
                 pos -= 1;
                 $('.rack .face > div')[pos].style.opacity = "1";
             }
+            e.preventDefault();
             break;
 
         case 187:
@@ -96,6 +102,7 @@ var world = (function () {
                 pos += 1;
                 $('.rack .face > div')[pos - 1].style.opacity = "0";
             }
+            e.preventDefault();
             break;
 
         }
@@ -103,8 +110,6 @@ var world = (function () {
         transformation = "translateZ(" + zAxis + "px)" + " rotateX(" + xAngle + "deg)" + " rotateY(" + yAngle + "deg)";
 
         $('.shape')[0].style.webkitTransform = transformation;
-
-        e.preventDefault();
 
     };
 
