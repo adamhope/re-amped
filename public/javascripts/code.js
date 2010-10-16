@@ -55,29 +55,34 @@ var world = (function () {
 
         switch (e.keyCode) {
 
-        case 32:
-            // space
-            toggleShape();
-            break;
+        // case 32:
+        //     // space
+        //     toggleShape();
+        //     e.preventDefault();
+        //     break;
 
         case 37:
             // left
             yAngle -= yAngInt;
+            e.preventDefault();
             break;
 
         case 38:
             // up
             xAngle += 90;
+            e.preventDefault();
             break;
 
         case 39:
             // right
             yAngle += yAngInt;
+            e.preventDefault();
             break;
 
         case 40:
             // down
             xAngle -= 90;
+            e.preventDefault();
             break;
 
         case 189:
@@ -87,6 +92,7 @@ var world = (function () {
                 pos -= 1;
                 $('.rack .face > div')[pos].style.opacity = "1";
             }
+            e.preventDefault();
             break;
 
         case 187:
@@ -96,6 +102,7 @@ var world = (function () {
                 pos += 1;
                 $('.rack .face > div')[pos - 1].style.opacity = "0";
             }
+            e.preventDefault();
             break;
 
         }
@@ -104,13 +111,12 @@ var world = (function () {
 
         $('.shape')[0].style.webkitTransform = transformation;
 
-        e.preventDefault();
-
     };
 
     document.addEventListener('keydown', inputHandler, false);
 
     function getRoomData(callback) {
+        console.debug('getting room data');
         $.get(base_url + 'blocks/coordinate/' + location.x + '/' + location.y + '.json', callback);
     }
 
@@ -147,23 +153,32 @@ var world = (function () {
     }
 
     function drawRoom(room) {
+        console.debug('drawing room', room);
         drawWall(room, 'north');
         drawWall(room, 'south');
         drawWall(room, 'east');
         drawWall(room, 'west');
     }
 
-    $('.item').mouseover(function () {
-        // show remove link
+    function refreshRoom() {
+        console.debug('refreshRoom');
+        getRoomData(drawRoom);
+    }
+
+    $('.deleteWall').click(function () {
+        $.get(base_url + 'blocks/coordinate/' + location.x + '/' + location.y + '/' + direction + '/0.json', refreshRoom);
     });
 
     $('.face').click(function () {
         var content = $('.content', this).html();
 
+
         console.debug(location.x, location.y, direction);
 
         if ($(this).hasClass('three')) {
-            if (!content) {
+            
+            
+            if (!$(this).hasClass('wall')) {
                 if (direction === 'north') {
                     location.y++;
                 } else if (direction === 'east') {
@@ -176,6 +191,8 @@ var world = (function () {
             } else {
                 console.debug('wall has content, cannot go forwards');
             }
+            
+            
         } else if ($(this).hasClass('two')) {
             console.debug('turn right 90 deg');
             if (direction === 'north') {
@@ -254,18 +271,41 @@ var world = (function () {
 
     });
 
-    function deleteWall() {
-        console.debug('delete');
+    function displayResults(data) {
+        var html = '<ul>';
+        $(data).each(function (i) {
+            html += '<li><img id="' + data[i].powerhouse_id + '" src="' + data[i].image_url + '" /></li>';
+        });
+        html += '</ul>';
+        $('#results').html(html);
     }
+    
+    $('.addItem').click(function (e) {
 
-    function addItem() {
-        console.debug('addItem');
-    }
+        var firstResult = $('#results li img').get(0),
+            theId = $(firstResult).attr('id');
+        
+        console.debug(theId);
+        
+        if (!$('.three').hasClass('wall')) {
+            console.debug('not a solid wall');
+            return false;
+        }
+        
+        if (!theID) {
+            return false;
+        }
 
-    function moveTo(pos) {
-        // getRoomData
-        // callback to drawRoom
-    }
+        $.get(base_url + 'blocks/coordinates/' + location.x + '/' + location.y + '/' + direction + '/' + theId + '.json', refreshRoom);
+
+
+
+    });
+
+    $('#go').click(function () {
+        console.debug($('search_text').val());
+        $.get(base_url + 'items/search/' + $('#search_text').val() + '.json', displayResults);
+    });
 
     // INIT
     getRoomData(drawRoom);
