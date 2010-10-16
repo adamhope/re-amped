@@ -110,8 +110,22 @@ var world = (function () {
 
     document.addEventListener('keydown', inputHandler, false);
 
-    function loadContent(direction, content) {
-        $('.' + faceMap[direction] + ' .content').html(content);
+    function getRoomData(callback) {
+        $.get(base_url + 'blocks/coordinate/' + location.x + '/' + location.y + '.json', callback);
+    }
+
+    function getItemData(itemNum, callback) {
+        $.get(base_url + 'items/' + itemNum + '.json', callback);
+    }
+
+    function loadContent(direction, itemNum) {
+        if (itemNum > 1) {
+            getItemData(itemNum, function (data) {
+                $('.' + faceMap[direction] + ' .content').html('<div class="item"><img src="' + data.item.image_url + '"</div>');
+            });
+        } else {
+            $('.' + faceMap[direction] + ' .content').html('');
+        }
     }
 
     function hideWall(direction) {
@@ -236,9 +250,7 @@ var world = (function () {
             //  do nothing
         }
         
-       getRoomData(drawRoom);
-            
-        console.debug(location.x, location.y, direction);
+        getRoomData(drawRoom);
 
     });
 
@@ -248,10 +260,6 @@ var world = (function () {
 
     function addItem() {
         console.debug('addItem');
-    }
-
-    function getRoomData(callback) {
-        $.get(base_url + 'blocks/coordinate/' + location.x + '/' + location.y + '.json', callback);
     }
 
     function moveTo(pos) {
