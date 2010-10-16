@@ -34,10 +34,15 @@
   color: #fff;
   border: 1px solid #555;
   -webkit-border-radius: 3px;
-  background: url(/images/wall.jpg) no-repeat;
 }
 
+
 /* Cube */
+.roof,
+.floor,
+.wall {
+  background: url(/images/wall.jpg) no-repeat;
+}
 
 .cube .one  {
   -webkit-transform: translateZ(200px);
@@ -69,12 +74,13 @@
 }
 
 /* Only for the lightbulb, not necessary at this stage */
-/*#space { position: relative; }*/
+#space { position: relative; }
 
 .lightBulb { 
   background: url(/images/light.png) no-repeat;
   width: 150px;
   position: absolute;
   height: 190px;
-  right: 30px;
+  right: 10px;
+  top: 0;
 }
