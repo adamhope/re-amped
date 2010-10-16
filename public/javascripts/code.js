@@ -37,8 +37,8 @@ var world = (function () {
         x: 0,
         y: 0
     },
-        direction = 'north',
-        editor = false,
+    direction = 'north',
+    editor = false,
 
     toggleShape = function () {
         reset();
@@ -110,8 +110,22 @@ var world = (function () {
 
     document.addEventListener('keydown', inputHandler, false);
 
-    function loadContent(direction, content) {
-        $('.' + faceMap[direction] + ' .content').html(content);
+    function getRoomData(callback) {
+        $.get(base_url + 'blocks/coordinate/' + location.x + '/' + location.y + '.json', callback);
+    }
+
+    function getItemData(itemNum, callback) {
+        $.get(base_url + 'items/' + itemNum + '.json', callback);
+    }
+
+    function loadContent(direction, itemNum) {
+        if (itemNum > 1) {
+            getItemData(itemNum, function (data) {
+                $('.' + faceMap[direction] + ' .content').html('<div class="item"><img src="' + data.item.image_url + '"</div>');
+            });
+        } else {
+            $('.' + faceMap[direction] + ' .content').html('');
+        }
     }
 
     function hideWall(direction) {
@@ -123,7 +137,6 @@ var world = (function () {
     }
 
     function drawWall(room, direction) {
-        console.debug('drawing: ', room[direction], 'on', faceMap[direction]);
         if (room[direction] > 0) {
             showWall(direction);
             loadContent(direction, room[direction]);
@@ -134,7 +147,6 @@ var world = (function () {
     }
 
     function drawRoom(room) {
-        console.debug(room);
         drawWall(room, 'north');
         drawWall(room, 'south');
         drawWall(room, 'east');
@@ -145,32 +157,101 @@ var world = (function () {
         // show remove link
     });
 
-    // $('.face').click(function() {
-    //     console.debug(this);
-    //     $('.selected').removeClass('.selected');
-    //     $(this).addClass('selected');
-    //     
-    //     // update message bar
-    //     // if no wall option to add
-    //     // if wall
-    //       // remove wall option
-    //       // if item
-    //           // remove item
-    //       // else add item
-    //     
-    // });
     $('.face').click(function () {
         var content = $('.content', this).html();
-        if (!content) {
-            // switch based on current direction
-            // sets new coords
-            // sets new direction
-            // get block at new coords
-            // draw room
-            console.debug('get room data for ...', 'draw room');
+
+        console.debug(location.x, location.y, direction);
+
+        if ($(this).hasClass('three')) {
+            if (!content) {
+                if (direction === 'north') {
+                    location.y++;
+                } else if (direction === 'east') {
+                    location.x++;
+                } else if (direction === 'south') {
+                    location.y--;
+                } else if (direction === 'west') {
+                    location.x--;
+                }
+            } else {
+                console.debug('wall has content, cannot go forwards');
+            }
+        } else if ($(this).hasClass('two')) {
+            console.debug('turn right 90 deg');
+            if (direction === 'north') {
+                direction = 'east';
+                faceMap = {
+                    north: 'five',
+                    south: 'two',
+                    east: 'three',
+                    west: 'one'
+                };
+            } else if (direction === 'east') {
+                direction = 'south';
+                faceMap = {
+                    north: 'one',
+                    south: 'three',
+                    east: 'five',
+                    west: 'two'
+                };
+            } else if (direction === 'south') {
+                direction = 'west';
+                faceMap = {
+                    north: 'two',
+                    south: 'five',
+                    east: 'one',
+                    west: 'three'
+                };
+            } else if (direction === 'west') {
+                direction = 'north';
+                faceMap = {
+                    north: 'three',
+                    south: 'one',
+                    east: 'two',
+                    west: 'five'
+                };
+            }            
+        } else if ($(this).hasClass('five')) {
+            console.debug('turn left 90 deg');
+            if (direction === 'north') {
+                direction = 'west';
+                faceMap = {
+                    north: 'two',
+                    south: 'five',
+                    east: 'one',
+                    west: 'three'
+                };
+            } else if (direction === 'east') {
+                direction = 'north';
+                faceMap = {
+                    north: 'three',
+                    south: 'one',
+                    east: 'two',
+                    west: 'five'
+                };
+            } else if (direction === 'south') {
+                direction = 'east';
+                faceMap = {
+                    north: 'five',
+                    south: 'two',
+                    east: 'three',
+                    west: 'one'
+                };
+            } else if (direction === 'west') {
+                direction = 'south';
+                faceMap = {
+                    north: 'one',
+                    south: 'three',
+                    east: 'five',
+                    west: 'two'
+                };
+            }            
         } else {
-            console.debug('invalid move');
+            //  do nothing
         }
+        
+        getRoomData(drawRoom);
+
     });
 
     function deleteWall() {
@@ -181,17 +262,13 @@ var world = (function () {
         console.debug('addItem');
     }
 
-    function getRoomData(loc, callback) {
-        $.get(base_url + 'blocks/coordinate/' + loc.x + '/' + loc.y + '.json', callback);
-    }
-
     function moveTo(pos) {
         // getRoomData
         // callback to drawRoom
     }
 
     // INIT
-    getRoomData(location, drawRoom);
+    getRoomData(drawRoom);
 
     return {
         drawRoom: drawRoom,
