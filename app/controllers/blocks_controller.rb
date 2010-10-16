@@ -90,4 +90,39 @@ class BlocksController < ApplicationController
       format.json  { head :ok }
     end
   end
+
+  def coordinate_get_items
+    @block = Block.first(:conditions => { :x => params[:x], :y => params[:y] })
+    @items = {
+        :north => @block.north,
+        :east => @block.east,
+        :south => @block.south,
+        :west => @block.west,
+    }
+
+    respond_to do |format|
+      format.html # coordinate_get_items.html.erb
+      format.xml  { render :xml => @items }
+      format.json  { render :json => @items }
+    end
+
+  end
+  def coordinate_set_item
+#    $stderr.puts 'SET PARAMS = ' + params.to_s
+#    require 'ruby-debug'; debugger
+    @block = Block.first(:conditions => { :x => params[:x], :y => params[:y] })
+    respond_to do |format|
+      if @block.update_attributes(params[:direction].to_sym => params[:item])
+        flash[:notice] = 'Block was successfully updated.'
+        format.html { redirect_to(@block) }
+        format.xml  { head :ok }
+        format.json  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @block.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @block.errors, :status => :unprocessable_entity }
+      end
+    end
+
+  end
 end

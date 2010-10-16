@@ -3,6 +3,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :blocks
 
+  map.connect '/blocks/coordinate/:x/:y', :controller => 'blocks', :action => 'coordinate_get_items'
+  map.connect '/blocks/coordinate/:x/:y/:direction/:item', :controller => 'blocks', :action => 'coordinate_set_item'
+
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
@@ -15,7 +18,6 @@ ActionController::Routing::Routes.draw do |map|
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   map.resources :products
-
   # Sample resource route with options:
   #   map.resources :products, :member => { :short => :get, :toggle => :post }, :collection => { :sold => :get }
 
