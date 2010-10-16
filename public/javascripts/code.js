@@ -55,11 +55,11 @@ var world = (function () {
 
         switch (e.keyCode) {
 
-        case 32:
-            // space
-            toggleShape();
-            e.preventDefault();
-            break;
+        // case 32:
+        //     // space
+        //     toggleShape();
+        //     e.preventDefault();
+        //     break;
 
         case 37:
             // left
