@@ -11,6 +11,114 @@ class BlocksController < ApplicationController
     end
   end
 
+  def map
+    #params[:x]
+    #params[:y]
+    #params[:direction]
+    @blocks = Block.all
+    min_x = 0
+    min_y = 0
+    max_x = 0
+    max_y = 0
+    @blocks.each do |block|
+      min_x = block.x.to_i if min_x.nil? or block.x.to_i < min_x
+      min_y = block.y.to_i if min_y.nil? or block.y.to_i < min_y
+      max_x = block.x.to_i if max_x.nil? or block.x.to_i > max_x
+      max_y = block.y.to_i if max_y.nil? or block.y.to_i > max_y
+    end
+    length_x = max_x - min_x ## one minus the total x length
+    length_y = max_y - min_y ## one minus the total y length
+    @ascii_map = []
+    (0..length_x).each do |x|
+      @ascii_map[x] = []
+      (0..length_y).each do |y|
+        @ascii_map[x][y] = '#'
+      end
+    end
+
+    Rails::logger.info "MINX = #{min_x}\tMAXX = #{max_x}\tMINY = #{min_y}\tMAXY = #{max_y}\n\n"
+    Rails::logger.info "LENGTHX = #{length_x}\tLENGTHY = #{length_y}\t\n\n"
+    Rails::logger.info ""
+    Rails::logger.info "##################"
+    Rails::logger.info @ascii_map.to_s
+    Rails::logger.info "##################"
+    @blocks.each do |block|
+      Rails::logger.info "BLOCK.X = #{block.x}\tBLOCK.Y = #{block.y}\n"
+      
+      #Rails::logger.info block.as_json
+      @ascii_map[block.x.to_i-min_x][block.y.to_i-min_y] = '.'
+      #@ascii_map[0][0] = ' '
+    end
+
+    top_bottom = ""
+    (length_x + 3).times do
+      top_bottom = top_bottom + "#"
+    end
+    @output = top_bottom + "\n"
+    (0..length_y).each do |y|
+      @output += "#"
+      (0..length_x).each do |x|
+        @output += @ascii_map[x][length_y-y]
+      end
+#      @output += "<br />"
+      @output += "#\n"
+    end
+    @output += top_bottom  + "\n"
+    
+    Rails::logger.info "##################"
+    Rails::logger.info @output
+    Rails::logger.info "##################"
+
+    Rails::logger.info "##################"
+    Rails::logger.info @ascii_map.to_s
+    Rails::logger.info "##################"
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @output }
+      format.json  { render :json => @output }
+    end
+  end
+
+
+
+#  def map3
+#    @blocks = Block.all
+#    y_row = ["X","X","X"]
+#
+#    map = [
+#           ["X","X","X"],
+#           ["X","0","X"],
+#           ["X","X","X"]
+#    ]
+#    x = 1
+#    y = 1
+#    @blocks.each do |block|
+#      y = y - 1 if block.north == 0
+#      y = y + 1 if block.south == 0
+#
+#      x = x - 1 if block.west == 0
+#      x = x + 1 if block.west == 0
+#    end
+#
+#    map[x][y] = 0
+#
+#    # Add outside row to grid if we've reached the edge.
+#    if y==0
+#      map.unshift(y_row)
+#      y = y + 1
+#    end
+#    if y == map.length
+#      map.push(y_row)
+#      y = y - 1
+#    end
+#
+#
+#
+#
+#    end
+#  end
+
   # GET /blocks/1
   # GET /blocks/1.xml
   def show
