@@ -11,6 +11,17 @@ class ItemsController < ApplicationController
     end
   end
 
+  def search
+    @items = Item.search_description(params[:description])
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @items }
+      format.json  { render :json => @items }
+    end
+    
+  end
+
   # GET /items/1
   # GET /items/1.xml
   def show
