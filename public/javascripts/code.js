@@ -292,11 +292,11 @@ var world = (function () {
             return false;
         }
         
-        if (!theID) {
+        if (!theId) {
             return false;
         }
 
-        $.get(base_url + 'blocks/coordinates/' + location.x + '/' + location.y + '/' + direction + '/' + theId + '.json', refreshRoom);
+        $.get(base_url + 'blocks/coordinate/' + location.x + '/' + location.y + '/' + direction + '/' + theId + '.json', refreshRoom);
 
 
 
