@@ -29,6 +29,7 @@
 
     .shape .face .content {
 /*      -webkit-transition: opacity 0.8s linear;*/
+      
     }
 
     .cube .face {
@@ -42,6 +43,7 @@
       color: #fff;
       border: 1px solid #555;
       -webkit-border-radius: 3px;
+      background: url(/images/wall.jpg) no-repeat;
     }
 
     /* Cube */
@@ -52,24 +54,38 @@
 
     .cube .two {
       -webkit-transform: rotateY(270deg) translateZ(-200px);
+      background-position: -800px -400px;
     }
 
     .cube .three {
       -webkit-transform: rotateY(360deg) translateZ(-200px);
-      
+       background-position: -400px -400px;
     }
 
     .cube .four {
       -webkit-transform: rotateX(90deg) translateZ(200px);
-      
+      background-position: -400px 0;
     }
 
     .cube .five {
       -webkit-transform: rotateY(90deg) translateZ(-200px);
+      background-position: 0 -400px;
     }
 
     .cube .six {
       -webkit-transform: rotateX(90deg) rotate(360deg) translateZ(-200px) ;
+      background-position: -400px -800px;
+    }
+
+    /* Only for the lightbulb, not necessary at this stage */
+    /*#space { position: relative; }*/
+
+    .lightBulb { 
+      background: url(/images/light.png) no-repeat;
+      width: 150px;
+      position: absolute;
+      height: 190px;
+      right: 30px;
     }
 
   </style>
@@ -83,23 +99,24 @@
   	<div id="space">
 
   		<div class="shape cube">
+  		  
 	        <div class="face one" style="display:none;">
-            <div class="content">One</div>
+            <div class="content">One - Front wall</div>
 	        </div>
 	        <div class="face two">
-            <div class="content">Two</div>
+            <div class="content">Two - Right</div>
 	        </div>
 	        <div class="face three">
-            <div class="content">Three</div>
+            <div class="content">Three - Back</div>
 	        </div>
 	        <div class="face four">
-            <div class="content">Four</div>
+            <div class="content">Four - Top</div>
 	        </div>
 	        <div class="face five">
             <div class="content">Five <a href="http://www.google.com">5555555555555555555</a></div>
 	        </div>
 	        <div class="face six">
-            <div class="content">Six</div>
+            <div class="content">Six - Floor</div>
 	        </div>
 	    </div>
   	    
@@ -108,168 +125,8 @@
   </div>
 
   <!-- // <script src="../common/jquery-1.4.2.min.js" charset="utf-8"></script> -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" charset="utf-8"></script>
-  <script type="text/javascript">
-
-    var world = (function () {
-
-      var zAxis    = 0,
-          yAngle   = 0,
-          xAngle   = 0,
-          zAxisInc = 400,
-          pos      = 0,
-          maxPos   = 5,
-          yAngInt  = 90,
-
-      reset = function () {
-        zAxis    = 0;
-        yAngle   = 0;
-        xAngle   = 0;
-        zAxisInc = 400;
-        pos      = 0;
-        maxPos   = 5;
-        yAngInt  = 90;
-      },
-      
-      toggleShape = function () {
-         reset();
-         if ($('.shape').hasClass('cube')) {
-           $('.shape').removeClass('cube');
-         } else {
-           $('.shape').addClass('cube');
-         }
-       },
-
-      inputHandler = function (e) {
-
-        var transformation = "";
-
-        switch (e.keyCode) {
-
-          case 32: // space
-            toggleShape();
-            break;
-
-          case 37: // left
-            yAngle -= yAngInt;
-            break;
-
-          case 38: // up
-            xAngle += 90;
-            break;
-
-          case 39: // right
-            yAngle += yAngInt;
-            break;
-
-          case 40: // down
-            xAngle -= 90;
-            break;
-
-          case 189: // minus
-            if (pos > 0) {
-              zAxis -= zAxisInc;
-              pos -= 1;
-              $('.rack .face > div')[pos].style.opacity = "1";
-            }
-            break;
-
-          case 187: // plus
-            if (pos < maxPos) {          
-              zAxis += zAxisInc;
-              pos += 1;
-              $('.rack .face > div')[pos-1].style.opacity = "0";
-            }
-            break;
-
-          }
-
-        transformation = "translateZ(" + zAxis + "px)" +
-          " rotateX(" + xAngle + "deg)" +
-          " rotateY(" + yAngle + "deg)";
-
-        $('.shape')[0].style.webkitTransform = transformation;
-
-        e.preventDefault();
-
-      };
-
-      document.addEventListener('keydown', inputHandler, false);
-
-      function loadContent(face, content) {
-          $('.' + face + ' .content').html(content);
-      }
-      
-      function hideWall(face) {
-          $('.' + face).hide();
-      }
-      
-      function showWall(face) {
-          $('.' + face).show();
-      }
-
-      // TODO: put stuff on different walls based on direction you're facing in
-      function drawRoom(room) {
-          if (room.left) {
-              showWall('five');
-              loadContent('five', room.left);
-          } else {
-              loadContent('five', '');
-              hideWall('five')
-          }
-
-          if (room.right) {
-              showWall('two');
-              loadContent('two', room.right);
-          } else {
-              loadContent('two', '');
-              hideWall('two');
-          }
-
-          if (room.front) {
-              showWall('three');
-              loadContent('three', room.front);
-          } else {
-              loadContent('three', '');
-              hideWall('three');
-          }
-
-      }
-
-      function getContent(pos) {
-          $.get();
-      }
-
-      function moveTo(pos) {
-          // getContent
-            // callback to drawRoom
-      }
-      
-      return {
-          drawRoom: drawRoom
-      }
-
-    })();
-
-    var pos = {x: 0, y:0, d:'n'};
-    
-    // getRoom()
-    
-    // drawRoom()
-    
-    // if face has no content move and change direction
-    
-    // if face has content click to add content
-    
-    // item click handler brings up lightbox
-
-    world.drawRoom({
-        front: 'FRONT FRONT FRONT',
-        left: 'LEFT LEFT LEFT LEFT',
-        right: 'right right right'
-    });    
-
-  </script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script src="code.js"></script>
 
 </body>
 </html>

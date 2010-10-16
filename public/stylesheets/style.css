@@ -1,0 +1,80 @@
+#space {
+  margin-top: 100px;
+  height: 600px;
+  -webkit-perspective: 800;
+  -webkit-perspective-origin: 50% 200px;
+}
+
+.shape {
+  position: relative;
+  margin: 0 auto;
+  height: 400px;
+  width: 400px;
+  -webkit-transition: -webkit-transform 2s linear;
+  -webkit-transform-style: preserve-3d;
+}
+
+.shape .face {
+/*      -webkit-transition: opacity, -webkit-transform 2s linear;*/
+}
+
+.shape .face .content {
+/*      -webkit-transition: opacity 0.8s linear;*/
+  
+}
+
+.cube .face {
+  position: absolute;
+  height: 360px;
+  width: 360px;
+  padding: 20px;
+  background-color: rgba(50, 50, 50, 0.7);
+  font-size: 27px;
+  line-height: 1em;
+  color: #fff;
+  border: 1px solid #555;
+  -webkit-border-radius: 3px;
+  background: url(/images/wall.jpg) no-repeat;
+}
+
+/* Cube */
+
+.cube .one  {
+  -webkit-transform: translateZ(200px);
+}
+
+.cube .two {
+  -webkit-transform: rotateY(270deg) translateZ(-200px);
+  background-position: -800px -400px;
+}
+
+.cube .three {
+  -webkit-transform: rotateY(360deg) translateZ(-200px);
+   background-position: -400px -400px;
+}
+
+.cube .four {
+  -webkit-transform: rotateX(90deg) translateZ(200px);
+  background-position: -400px 0;
+}
+
+.cube .five {
+  -webkit-transform: rotateY(90deg) translateZ(-200px);
+  background-position: 0 -400px;
+}
+
+.cube .six {
+  -webkit-transform: rotateX(90deg) rotate(360deg) translateZ(-200px) ;
+  background-position: -400px -800px;
+}
+
+/* Only for the lightbulb, not necessary at this stage */
+/*#space { position: relative; }*/
+
+.lightBulb { 
+  background: url(/images/light.png) no-repeat;
+  width: 150px;
+  position: absolute;
+  height: 190px;
+  right: 30px;
+}
