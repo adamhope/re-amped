@@ -1,0 +1,13 @@
+<p>
+  <b>Powerhouse:</b>
+  <%=h @item.powerhouse_id %>
+</p>
+
+<p>
+  <b>Image url:</b>
+  <%=h @item.image_url %>
+</p>
+
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>

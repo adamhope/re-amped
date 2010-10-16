@@ -1,0 +1,20 @@
+<h1>Editing item</h1>
+
+<% form_for(@item) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :powerhouse_id %><br />
+    <%= f.text_field :powerhouse_id %>
+  </p>
+  <p>
+    <%= f.label :image_url %><br />
+    <%= f.text_field :image_url %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @item %> |
+<%= link_to 'Back', items_path %>
