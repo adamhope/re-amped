@@ -3,8 +3,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :blocks
 
-  map.connect '/blocks/coordinate/:x/:y', :controller => 'blocks', :action => 'coordinate_get_items'
-  map.connect '/blocks/coordinate/:x/:y/:direction/:item', :controller => 'blocks', :action => 'coordinate_set_item'
+  map.connect '/blocks/coordinate/:x/:y.:format', :controller => 'blocks', :action => 'coordinate_get_items'
+  map.connect '/blocks/coordinate/:x/:y/:direction/:item.:format', :controller => 'blocks', :action => 'coordinate_set_item'
 
   # The priority is based upon order of creation: first created -> highest priority.
 
