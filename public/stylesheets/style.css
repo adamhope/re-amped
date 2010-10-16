@@ -38,6 +38,10 @@ body {
   border: 1px solid #555;
 }
 
+.face .selected {
+  border: 2px solid green;
+}
+
 /* Cube */
 .roof,
 .floor,
