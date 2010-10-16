@@ -152,7 +152,23 @@ var world = (function () {
         }
     }
 
+    function insertMap(data) {
+        console.debug('drawing map');
+        console.debug(data);
+        $('#map').html(data[0]); 
+    }
+
+    function drawMap() {
+        $.ajax({url: base_url + 'blocks/ascii/map/' + location.x + '/' + location.y + '/' + direction + '.json',
+        context: document.body,
+        success: insertMap
+        });
+    }
+
     function drawRoom(room) {
+        console.debug('draw room');
+        // TODO: draw the map here
+        drawMap();
         console.debug('drawing room', room);
         drawWall(room, 'north');
         drawWall(room, 'south');
@@ -292,13 +308,11 @@ var world = (function () {
             return false;
         }
         
-        if (!theID) {
+        if (!theId) {
             return false;
         }
 
-        $.get(base_url + 'blocks/coordinates/' + location.x + '/' + location.y + '/' + direction + '/' + theId + '.json', refreshRoom);
-
-
+        $.get(base_url + 'blocks/coordinate/' + location.x + '/' + location.y + '/' + direction + '/' + theId + '.json', refreshRoom);
 
     });
 

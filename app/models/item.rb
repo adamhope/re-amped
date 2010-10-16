@@ -35,7 +35,7 @@ class Item < ActiveRecord::Base
     items_response.as_json["items"].each do |powerhouse_item|
       multimedia_uri = base_url + powerhouse_item["multimedia_uri"]
       multimedia = HTTParty.get(multimedia_uri)
-      unless multimedia.as_json["multimedia"].empty?
+      unless multimedia.as_json["multimedia"].empty? || powerhouse_item["id"].to_i > 100000000
         img_url = multimedia.as_json["multimedia"][0]["images"]["thumbnail"]["url"]
         unless img_url.nil?
           # This is an item with an image. Add it to our DB.

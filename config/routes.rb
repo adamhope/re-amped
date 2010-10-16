@@ -5,7 +5,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.connect '/blocks/coordinate/:x/:y.:format', :controller => 'blocks', :action => 'coordinate_get_items'
   map.connect '/blocks/coordinate/:x/:y/:direction/:item.:format', :controller => 'blocks', :action => 'coordinate_set_item'
-  map.connect '/blocks/ascii/map.:format', :controller => 'blocks', :action => 'map'
+  map.connect '/blocks/ascii/map/:x/:y/:direction.:format', :controller => 'blocks', :action => 'map'
   map.connect '/items/search/:description.:format', :controller => 'items', :action => 'search'
 
   # The priority is based upon order of creation: first created -> highest priority.

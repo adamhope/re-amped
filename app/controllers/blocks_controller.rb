@@ -49,21 +49,33 @@ class BlocksController < ApplicationController
       @ascii_map[block.x.to_i-min_x][block.y.to_i-min_y] = '.'
       #@ascii_map[0][0] = ' '
     end
+    if params[:direction] = 'north'
+      @ascii_map[params[:x].to_i-min_x][params[:y].to_i-min_y] = '^'
+    elsif params[:direction] = 'east'
+      @ascii_map[params[:x].to_i-min_x][params[:y].to_i-min_y] = '>'
+    elsif params[:direction] = 'south'
+      @ascii_map[params[:x].to_i-min_x][params[:y].to_i-min_y] = 'v'
+    elsif params[:direction] = 'west'
+      @ascii_map[params[:x].to_i-min_x][params[:y].to_i-min_y] = '<'
+    end
 
     top_bottom = ""
     (length_x + 3).times do
       top_bottom = top_bottom + "#"
     end
-    @output = top_bottom + "\n"
+    @output = top_bottom + "<br />"
     (0..length_y).each do |y|
       @output += "#"
       (0..length_x).each do |x|
         @output += @ascii_map[x][length_y-y]
       end
 #      @output += "<br />"
-      @output += "#\n"
+      @output += "#<br />"
     end
-    @output += top_bottom  + "\n"
+    @output += top_bottom  + "<br />"
+
+    # @output = '"' + @output + '"'
+    @output_map = [@output]
     
     Rails::logger.info "##################"
     Rails::logger.info @output
@@ -75,8 +87,8 @@ class BlocksController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @output }
-      format.json  { render :json => @output }
+      format.xml  { render :xml => @output_map }
+      format.json  { render :json => @output_map }
     end
   end
 
