@@ -38,11 +38,23 @@ body {
   border: 1px solid #555;
 }
 
+.face .selected {
+  border: 2px solid green;
+}
+
 /* Cube */
 .roof,
 .floor,
 .wall {
   background: url(/images/wall.jpg) no-repeat;
+}
+
+.roof {
+  background-position: -400px 0;
+}
+
+.floor {
+  background-position: -400px -800px;
 }
 
 .cube .one  {
@@ -61,7 +73,6 @@ body {
 
 .cube .four {
   -webkit-transform: rotateX(90deg) translateZ(200px);
-  background-position: -400px 0;
 }
 
 .cube .five {
@@ -84,3 +95,13 @@ body {
   right: 10px;
   top: 0;
 }
+
+.item {
+  background: url(/images/frame.png) no-repeat;
+  width: 160px;
+  height: 160px;
+  padding: 50px;
+  margin: 40px auto 0;
+}
+
+
