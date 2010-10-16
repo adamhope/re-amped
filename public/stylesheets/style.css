@@ -104,4 +104,28 @@ body {
   margin: 40px auto 0;
 }
 
+.delete {
+  
+}
 
+#searchBox {
+  float: left;
+  width: 200px;
+  margin-top: -70px;
+  font: 0.6em arial;
+  color: #666;
+}
+
+#searchBox input {
+  -webkit-border-radius: 5px;
+  border: none;
+  padding: 5px;
+  width: 190px;
+  font: 2em arial;
+  background: #fff url(/images/search.jpg) no-repeat right;
+}
+
+#wrapper {
+  width: 960px;
+  margin: 0 auto;
+}
