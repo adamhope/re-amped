@@ -144,7 +144,7 @@ class BlocksController < ApplicationController
 
     ## TODO: Make sure opposite wall is also updated accordingly.
     ## Item_0 is the special "item" that's an empty space.
-    if params[:item] == 0
+    if params[:item].to_i == 0
       if (params[:direction] == 'north')
         other_x = params[:x].to_i
         other_y = params[:y].to_i + 1
