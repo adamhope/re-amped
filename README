@@ -1,5 +1,10 @@
 re-amped - make your own museum....
 
+powerhouse api key: 4db781fa8bf0ad9
+powerhouse api eg:
+
+    http://api.powerhousemuseum.com/api/v1/item/json/?api_key=4db781fa8bf0ad9&description=basket
+    
 Gems:
 sudo gem install rails -v 2.3.4
 
