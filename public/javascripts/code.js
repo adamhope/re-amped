@@ -271,6 +271,42 @@ var world = (function () {
 
     });
 
+    function displayResults(data) {
+        var html = '<ul>';
+        $(data).each(function (i) {
+            html += '<li><img id="' + data[i].powerhouse_id + '" src="' + data[i].image_url + '" /></li>';
+        });
+        html += '</ul>';
+        $('#results').html(html);
+    }
+    
+    $('.addItem').click(function (e) {
+
+        var firstResult = $('#results li img').get(0),
+            theId = $(firstResult).attr('id');
+        
+        console.debug(theId);
+        
+        if (!$('.three').hasClass('wall')) {
+            console.debug('not a solid wall');
+            return false;
+        }
+        
+        if (!theID) {
+            return false;
+        }
+
+        $.get(base_url + 'blocks/coordinates/' + location.x + '/' + location.y + '/' + direction + '/' + theId + '.json', refreshRoom);
+
+
+
+    });
+
+    $('#go').click(function () {
+        console.debug($('search_text').val());
+        $.get(base_url + 'items/search/' + $('#search_text').val() + '.json', displayResults);
+    });
+
     // INIT
     getRoomData(drawRoom);
 
