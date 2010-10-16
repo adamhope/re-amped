@@ -38,6 +38,16 @@ body {
   border: 1px solid #555;
 }
 
+.cube .three .content {
+  background: url(/images/forward.png) no-repeat bottom;
+  height: 250px;
+}
+
+/* so that no forward arrow appears when there is a wall */
+.cube .wall .content {
+  background-image: none;
+}
+
 .face .selected {
   border: 2px solid green;
 }
@@ -111,18 +121,33 @@ body {
 #searchBox {
   float: left;
   width: 200px;
-  margin-top: -70px;
+  margin-top: -78px;
   font: 0.6em arial;
-  color: #666;
+  color: #525252;
 }
 
-#searchBox input {
+#searchBox .field_wrapper {
   -webkit-border-radius: 5px;
+  width: 195px;
+  background-color: #fff;
+  height: 30px;
+  padding: 2px;
+}
+
+#searchBox #search_text {
   border: none;
   padding: 5px;
-  width: 190px;
-  font: 2em arial;
+  font: 1.8em arial;
+  float: left;
+  width: 155px;
+}
+
+#searchBox #go {
+  border: none;
   background: #fff url(/images/search.jpg) no-repeat right;
+  height: 30px;
+  text-indent: -100000px;
+  width: 30px;
 }
 
 #wrapper {
