@@ -1,8 +1,20 @@
 re-amped - make your own museum....
 
 Gems:
+sudo gem install rails -v 2.3.4
 
 Grab cached gems from Breezy's USB:
 
     # Makes them available to rubygems when installing
     sudo cp /Volumes/LIFE\ ON\ USB/cache/* /opt/local/lib/ruby/gems/1.8/cache
+
+Getting JSON from the app:
+
+ * All blocks: http://localhost:3000/blocks.json
+
+      [{"block":{"created_at":"2010-10-16T01:31:41Z","x":0,"y":0,"updated_at":"2010-10-16T01:31:41Z","id":1,"user_id":null,"south":1,"north":1,"west":1,"east":1}}]
+
+ * A block:    http://localhost:3000/blocks/1.json
+
+      {"block":{"created_at":"2010-10-16T01:31:41Z","x":0,"y":0,"updated_at":"2010-10-16T01:31:41Z","id":1,"user_id":null,"south":1,"north":1,"west":1,"east":1}}
+      
