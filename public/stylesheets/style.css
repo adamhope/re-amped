@@ -96,10 +96,12 @@ body {
   top: 0;
 }
 
-.frame {
+.item {
   background: url(/images/frame.png) no-repeat;
   width: 160px;
   height: 160px;
   padding: 50px;
-  margin: 50px auto 0;
+  margin: 40px auto 0;
 }
+
+
