@@ -1,0 +1,8 @@
+re-amped - make your own museum....
+
+Gems:
+
+Grab cached gems from Breezy's USB:
+
+    # Makes them available to rubygems when installing
+    sudo cp /Volumes/LIFE\ ON\ USB/cache/* /opt/local/lib/ruby/gems/1.8/cache

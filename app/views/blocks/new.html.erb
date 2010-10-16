@@ -1,0 +1,35 @@
+<h1>New block</h1>
+
+<% form_for(@block) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :x %><br />
+    <%= f.text_field :x %>
+  </p>
+  <p>
+    <%= f.label :y %><br />
+    <%= f.text_field :y %>
+  </p>
+  <p>
+    <%= f.label :north %><br />
+    <%= f.text_field :north %>
+  </p>
+  <p>
+    <%= f.label :east %><br />
+    <%= f.text_field :east %>
+  </p>
+  <p>
+    <%= f.label :south %><br />
+    <%= f.text_field :south %>
+  </p>
+  <p>
+    <%= f.label :west %><br />
+    <%= f.text_field :west %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', blocks_path %>
