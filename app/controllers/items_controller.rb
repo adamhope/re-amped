@@ -14,7 +14,7 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.xml
   def show
-    @item = Item.find(params[:id])
+    @item = Item.find_item(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -22,6 +22,7 @@ class ItemsController < ApplicationController
       format.json  { render :json => @item }
     end
   end
+
 
   # GET /items/new
   # GET /items/new.xml
