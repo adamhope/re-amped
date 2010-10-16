@@ -1,0 +1,27 @@
+
+Web service:
+GET /block/$x/$y
+Return JSON: { north: $objectid_a, east: $objectid_b, south: $objectid_c, west: $objectid_d }
+
+POST /block/$x/$y/$direction
+objectid=$objectid
+
+GET /object
+Description: List of valid objectIDs
+Return JSON: [ $objectid_a, $objectid_b, etc ]
+
+Variable: $direction
+Description: Direction (we can potentially change this to an integer if that makes it easier)
+Datatype: enum ('north', 'east', 'south', 'west')
+
+Variable: $x
+Description: Coordinate in the horizontal direction. Positive is easterly, negative is westerly.
+Datatype: integer [-2^31, 2^31-1]
+
+Variable: $y
+Description: Coordinate in the vertical direction. Positive is northerly, negative is southerly.
+Datatype: integer [-2^31, 2^31-1]
+
+Variable: $objectid
+Description: Represents an object.
+Datatype: non-negative integer [0, 2^31-1]
