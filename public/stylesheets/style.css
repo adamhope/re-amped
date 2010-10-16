@@ -142,7 +142,7 @@ body {
   width: 155px;
 }
 
-#searchBox #search_button {
+#searchBox #go {
   border: none;
   background: #fff url(/images/search.jpg) no-repeat right;
   height: 30px;
