@@ -7,6 +7,7 @@ class BlocksController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @blocks }
+      format.json  { render :json => @blocks }
     end
   end
 
@@ -18,6 +19,7 @@ class BlocksController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @block }
+      format.json  { render :json => @block }
     end
   end
 
@@ -29,6 +31,7 @@ class BlocksController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @block }
+      format.json  { render :json => @block }
     end
   end
 
@@ -47,9 +50,11 @@ class BlocksController < ApplicationController
         flash[:notice] = 'Block was successfully created.'
         format.html { redirect_to(@block) }
         format.xml  { render :xml => @block, :status => :created, :location => @block }
+        format.json  { render :json => @block, :status => :created, :location => @block }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @block.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @block.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -64,9 +69,11 @@ class BlocksController < ApplicationController
         flash[:notice] = 'Block was successfully updated.'
         format.html { redirect_to(@block) }
         format.xml  { head :ok }
+        format.json  { head :ok }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @block.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @block.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -80,6 +87,7 @@ class BlocksController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(blocks_url) }
       format.xml  { head :ok }
+      format.json  { head :ok }
     end
   end
 end
