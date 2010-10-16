@@ -15,6 +15,8 @@ class ItemsController < ApplicationController
   # GET /items/1.xml
   def show
     @item = Item.find_item(params[:id])
+    $logger = Rails::logger
+    $logger.info(@item.to_s)
 
     respond_to do |format|
       format.html # show.html.erb
