@@ -146,7 +146,7 @@ class BlocksController < ApplicationController
       else
         raise 'invalid directions'
       end
-      @other_block = Block.first(:conditions => { :x => other_x, :y => other_y }})
+      @other_block = Block.first(:conditions => { :x => other_x, :y => other_y })
       unless @other_block.nil?
         @other_block.update_attributes(other_direction.to_sym => 0)
       end
