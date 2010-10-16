@@ -49,6 +49,15 @@ class BlocksController < ApplicationController
       @ascii_map[block.x.to_i-min_x][block.y.to_i-min_y] = '.'
       #@ascii_map[0][0] = ' '
     end
+    if params[:direction] = 'north'
+      @ascii_map[params[:x].to_i-min_x][params[:y].to_i-min_y] = '^'
+    elsif params[:direction] = 'east'
+      @ascii_map[params[:x].to_i-min_x][params[:y].to_i-min_y] = '>'
+    elsif params[:direction] = 'south'
+      @ascii_map[params[:x].to_i-min_x][params[:y].to_i-min_y] = 'v'
+    elsif params[:direction] = 'west'
+      @ascii_map[params[:x].to_i-min_x][params[:y].to_i-min_y] = '<'
+    end
 
     top_bottom = ""
     (length_x + 3).times do
