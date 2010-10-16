@@ -1,5 +1,5 @@
 sudo gem install "rack" -v '1.1.0'
-sudo gem install "rails" -v "2.3.8"
+sudo gem install "rails" -v "2.3.4"
 sudo gem install "rake" -v "0.8.7"
 sudo gem install "mysql" -v "2.8.1"
 sudo gem install "nokogiri" -v "1.4.3.1"
