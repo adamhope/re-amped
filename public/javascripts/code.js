@@ -110,8 +110,7 @@ var world = (function () {
 
     document.addEventListener('keydown', inputHandler, false);
 
-    function loadContent(face, content) {
-        console.debug(face, content);
+    function loadContent(direction, content) {
         $('.' + faceMap[direction] + ' .content').html(content);
     }
 
@@ -124,7 +123,7 @@ var world = (function () {
     }
 
     function drawWall(room, direction) {
-
+        console.debug('drawing: ', room[direction], 'on', faceMap[direction]);
         if (room[direction] > 0) {
             showWall(direction);
             loadContent(direction, room[direction]);
