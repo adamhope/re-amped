@@ -121,17 +121,19 @@ body {
 #searchBox {
   float: left;
   width: 200px;
-  margin-top: -78px;
+  margin-top: -80px;
   font: 0.6em arial;
   color: #525252;
+  line-height: 1.5em;
 }
 
 #searchBox .field_wrapper {
   -webkit-border-radius: 5px;
   width: 195px;
   background-color: #fff;
-  height: 30px;
+  height: 32px;
   padding: 2px;
+  margin-bottom: 10px;
 }
 
 #searchBox #search_text {
@@ -140,6 +142,7 @@ body {
   font: 1.8em arial;
   float: left;
   width: 155px;
+  outline: none;
 }
 
 #searchBox #go {
@@ -154,3 +157,35 @@ body {
   width: 960px;
   margin: 0 auto;
 }
+
+#toolbar {
+  float: right;
+  width: 200px;
+  margin-top: -70px;
+}
+
+#results ul {
+  margin: 0;
+  padding: 0;
+}
+
+#results ul li {
+  list-style-type: none;
+  margin: 0;
+  width: 66px;
+  height: 66px;
+  float: left;
+}
+
+#results img {
+  height: 60px;
+  width: 60px;
+  border: 1px solid #000;
+}
+
+#results img:hover {
+  border-color: #ccc;
+}
+
+
+
