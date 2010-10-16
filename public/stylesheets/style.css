@@ -38,13 +38,6 @@ body {
   border: 1px solid #555;
 }
 
-.floor,
-.roof,
-.wall {
-  background: url(/images/wall.jpg) no-repeat;
-}
-
-
 /* Cube */
 .roof,
 .floor,
