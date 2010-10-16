@@ -23,5 +23,5 @@ Getting JSON from the app:
 
       {"block":{"created_at":"2010-10-16T01:31:41Z","x":0,"y":0,"updated_at":"2010-10-16T01:31:41Z","id":1,"user_id":null,"south":1,"north":1,"west":1,"east":1}}
 
-MySQL fixture import:
-    mysql -uroot amped_development < scratch/elam/fixture
+MySQL  DB update and fixture import:
+    rake db:migrate:reset && mysql -u root amped_development < scratch/elam/fixture
