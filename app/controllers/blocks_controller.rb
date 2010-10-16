@@ -93,6 +93,32 @@ class BlocksController < ApplicationController
 
   def coordinate_get_items
     @block = Block.first(:conditions => { :x => params[:x], :y => params[:y] })
+    if @block.nil?
+      create_hash = {
+        :user_id => 0,
+        :x       => params[:x],
+        :y       => params[:y],
+        :north   => 1,
+        :east    => 1,
+        :south   => 1,
+        :west    => 1,
+      }
+       [
+        [ 0, 1, :north, :south],
+        [ 1, 0,  :east,  :west],
+        [ 0,-1, :south, :north],
+        [-1, 0,  :west,  :east],
+      ].each do |delta_x, delta_y, direction, reverse_direction|
+#  Rails::logger.info('asgfsdfs3' + 'x' + delta_x.to_s + 'x' + delta_y.to_s + 'x' + direction.to_s + 'x' + reverse_direction.to_s)
+        @block = Block.first(:conditions => { :x => params[:x].to_i+delta_x, :y => params[:y].to_i+delta_y })
+        if !@block.nil? and @block.send(reverse_direction) == 0
+          create_hash[direction] = 0
+        end
+      end
+
+      @block = Block.new(create_hash)
+      @block.save
+    end
     @items = {
         :north => @block.north,
         :east => @block.east,
@@ -107,41 +133,33 @@ class BlocksController < ApplicationController
     end
 
   end
+
   def coordinate_set_item
 #    $stderr.puts 'SET PARAMS = ' + params.to_s
 #    require 'ruby-debug'; debugger
     @block = Block.first(:conditions => { :x => params[:x], :y => params[:y] })
-#    if @block.nil?
-#      ## Need to create with blank defaults...unless we're coming from a direction with blank walls
-#      [
-#        { 0, 1, 'north'},
-#        { 1, 0, 'east'},
-#        { 0,-1, 'south'},
-#        {-1, 0, 'west'}
-#      ].each do |delta_x, delta_y, direction|
-#      Block.first(:conditions => { :x => params[:x]+delta_x, :y => params[:y]+delta_y })
-#      if 
-#      end
-#    end
+    if @block.nil?
+      coordinate_get_item
+    end
 
     ## TODO: Make sure opposite wall is also updated accordingly.
     ## Item_0 is the special "item" that's an empty space.
     if params[:item] == 0
       if (params[:direction] == 'north')
-        other_x = params[:x]
-        other_y = params[:y] + 1
+        other_x = params[:x].to_i
+        other_y = params[:y].to_i + 1
         other_direction = 'south'
       elsif (params[:direction] == 'east')
-        other_x = params[:x] + 1
-        other_y = params[:y]
+        other_x = params[:x].to_i + 1
+        other_y = params[:y].to_i
         other_direction = 'west'
       elsif (params[:direction] == 'south')
-        other_x = params[:x]
-        other_y = params[:y] - 1
+        other_x = params[:x].to_i
+        other_y = params[:y].to_i - 1
         other_direction = 'north'
       elsif (params[:direction] == 'west')
-        other_x = params[:x] - 1
-        other_y = params[:y]
+        other_x = params[:x].to_i - 1
+        other_y = params[:y].to_i
         other_direction = 'east'
       else
         raise 'invalid directions'
