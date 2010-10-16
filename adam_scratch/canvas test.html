@@ -29,6 +29,7 @@
 
     .shape .face .content {
 /*      -webkit-transition: opacity 0.8s linear;*/
+      
     }
 
     .cube .face {
@@ -42,6 +43,7 @@
       color: #fff;
       border: 1px solid #555;
       -webkit-border-radius: 3px;
+      background: url(/images/wall.jpg) no-repeat;
     }
 
     /* Cube */
@@ -52,24 +54,38 @@
 
     .cube .two {
       -webkit-transform: rotateY(270deg) translateZ(-200px);
+      background-position: -800px -400px;
     }
 
     .cube .three {
       -webkit-transform: rotateY(360deg) translateZ(-200px);
-      
+       background-position: -400px -400px;
     }
 
     .cube .four {
       -webkit-transform: rotateX(90deg) translateZ(200px);
-      
+      background-position: -400px 0;
     }
 
     .cube .five {
       -webkit-transform: rotateY(90deg) translateZ(-200px);
+      background-position: 0 -400px;
     }
 
     .cube .six {
       -webkit-transform: rotateX(90deg) rotate(360deg) translateZ(-200px) ;
+      background-position: -400px -800px;
+    }
+
+    /* Only for the lightbulb, not necessary at this stage */
+    /*#space { position: relative; }*/
+
+    .lightBulb { 
+      background: url(/images/light.png) no-repeat;
+      width: 150px;
+      position: absolute;
+      height: 190px;
+      right: 30px;
     }
 
   </style>
@@ -83,23 +99,24 @@
   	<div id="space">
 
   		<div class="shape cube">
+  		  
 	        <div class="face one" style="display:none;">
-            <div class="content">One</div>
+            <div class="content">One - Front wall</div>
 	        </div>
 	        <div class="face two">
-            <div class="content">Two</div>
+            <div class="content">Two - Right</div>
 	        </div>
 	        <div class="face three">
-            <div class="content">Three</div>
+            <div class="content">Three - Back</div>
 	        </div>
 	        <div class="face four">
-            <div class="content">Four</div>
+            <div class="content">Four - Top</div>
 	        </div>
 	        <div class="face five">
             <div class="content">Five <a href="http://www.google.com">5555555555555555555</a></div>
 	        </div>
 	        <div class="face six">
-            <div class="content">Six</div>
+            <div class="content">Six - Floor</div>
 	        </div>
 	    </div>
   	    
