@@ -111,6 +111,46 @@ class BlocksController < ApplicationController
 #    $stderr.puts 'SET PARAMS = ' + params.to_s
 #    require 'ruby-debug'; debugger
     @block = Block.first(:conditions => { :x => params[:x], :y => params[:y] })
+#    if @block.nil?
+#      ## Need to create with blank defaults...unless we're coming from a direction with blank walls
+#      [
+#        { 0, 1, 'north'},
+#        { 1, 0, 'east'},
+#        { 0,-1, 'south'},
+#        {-1, 0, 'west'}
+#      ].each do |delta_x, delta_y, direction|
+#      Block.first(:conditions => { :x => params[:x]+delta_x, :y => params[:y]+delta_y })
+#      if 
+#      end
+#    end
+
+    ## TODO: Make sure opposite wall is also updated accordingly.
+    ## Item_0 is the special "item" that's an empty space.
+    if params[:item] == 0
+      if (params[:direction] == 'north')
+        other_x = params[:x]
+        other_y = params[:y] + 1
+        other_direction = 'south'
+      elsif (params[:direction] == 'east')
+        other_x = params[:x] + 1
+        other_y = params[:y]
+        other_direction = 'west'
+      elsif (params[:direction] == 'south')
+        other_x = params[:x]
+        other_y = params[:y] - 1
+        other_direction = 'north'
+      elsif (params[:direction] == 'west')
+        other_x = params[:x] - 1
+        other_y = params[:y]
+        other_direction = 'east'
+      else
+        raise 'invalid directions'
+      end
+      @other_block = Block.first(:conditions => { :x => other_x, :y => other_y }})
+      unless @other_block.nil?
+        @other_block.update_attributes(other_direction.to_sym => 0)
+      end
+    end
     respond_to do |format|
       if @block.update_attributes(params[:direction].to_sym => params[:item])
         flash[:notice] = 'Block was successfully updated.'
