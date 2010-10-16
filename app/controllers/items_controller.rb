@@ -7,6 +7,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @items }
+      format.json  { render :json => @items }
     end
   end
 
@@ -18,6 +19,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @item }
+      format.json  { render :json => @item }
     end
   end
 
@@ -29,6 +31,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @item }
+      format.json  { render :json => @item }
     end
   end
 
@@ -47,9 +50,11 @@ class ItemsController < ApplicationController
         flash[:notice] = 'Item was successfully created.'
         format.html { redirect_to(@item) }
         format.xml  { render :xml => @item, :status => :created, :location => @item }
+        format.json  { render :json => @item, :status => :created, :location => @item }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @item.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -64,9 +69,11 @@ class ItemsController < ApplicationController
         flash[:notice] = 'Item was successfully updated.'
         format.html { redirect_to(@item) }
         format.xml  { head :ok }
+        format.json  { head :ok }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @item.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -80,6 +87,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(items_url) }
       format.xml  { head :ok }
+      format.json  { head :ok }
     end
   end
 end
