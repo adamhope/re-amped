@@ -1,0 +1,30 @@
+<h1>Listing blocks</h1>
+
+<table>
+  <tr>
+    <th>X</th>
+    <th>Y</th>
+    <th>North</th>
+    <th>East</th>
+    <th>South</th>
+    <th>West</th>
+  </tr>
+
+<% @blocks.each do |block| %>
+  <tr>
+    <td><%=h block.x %></td>
+    <td><%=h block.y %></td>
+    <td><%=h block.north %></td>
+    <td><%=h block.east %></td>
+    <td><%=h block.south %></td>
+    <td><%=h block.west %></td>
+    <td><%= link_to 'Show', block %></td>
+    <td><%= link_to 'Edit', edit_block_path(block) %></td>
+    <td><%= link_to 'Destroy', block, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New block', new_block_path %>

@@ -1,0 +1,33 @@
+<p>
+  <b>X:</b>
+  <%=h @block.x %>
+</p>
+
+<p>
+  <b>Y:</b>
+  <%=h @block.y %>
+</p>
+
+<p>
+  <b>North:</b>
+  <%=h @block.north %>
+</p>
+
+<p>
+  <b>East:</b>
+  <%=h @block.east %>
+</p>
+
+<p>
+  <b>South:</b>
+  <%=h @block.south %>
+</p>
+
+<p>
+  <b>West:</b>
+  <%=h @block.west %>
+</p>
+
+
+<%= link_to 'Edit', edit_block_path(@block) %> |
+<%= link_to 'Back', blocks_path %>

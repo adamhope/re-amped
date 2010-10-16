@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  x: 
+  y: 
+  north: 
+  east: 
+  south: 
+  west: MyString
+
+two:
+  x: 
+  y: 
+  north: 
+  east: 
+  south: 
+  west: MyString
