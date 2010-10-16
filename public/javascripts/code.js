@@ -88,11 +88,11 @@ var world = (function () {
   }
   
   function hideWall(face) {
-      $('.' + face).hide();
+      $('.' + face).removeClass('wall');
   }
   
   function showWall(face) {
-      $('.' + face).show();
+      $('.' + face).addClass('wall');
   }
 
   // TODO: put stuff on different walls based on direction you're facing in
