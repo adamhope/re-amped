@@ -161,7 +161,31 @@ body {
 #toolbar {
   float: right;
   width: 200px;
-  margin-top: -70px;
+  margin-top: -105px;
+  color: #fff;
+}
+
+#toolbar span {
+  display: block;
+}
+
+#toolbar span {
+  background-repeat:  no-repeat;
+  padding: 20px 0 18px 63px;
+  font: bold 1.2em arial;
+  color: #ccc;
+}
+
+#toolbar span:hover {
+  cursor: pointer;
+}
+
+.deleteWall {
+  background-image: url(/images/delete.png);
+}
+
+.addItem {
+  background-image: url(/images/add.png);
 }
 
 #results ul {
@@ -185,6 +209,7 @@ body {
 
 #results img:hover {
   border-color: #ccc;
+  cursor: pointer;
 }
 
 
