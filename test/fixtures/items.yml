@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  powerhouse_id: 1
+  image_url: MyString
+
+two:
+  powerhouse_id: 1
+  image_url: MyString
